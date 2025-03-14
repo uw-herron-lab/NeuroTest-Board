@@ -335,7 +335,7 @@ void time_counter()
 
 }
 
-float adc_read(adc_data& data_, int stim_level,int burst_mode, float volt_ref, struct BP_filter_CH0 filt_v, u_int8_t state_ = 0, byte play_data = 0)
+float adc_read(adc_data& data_, int stim_level,int burst_mode, int evoked_t, float volt_ref, struct BP_filter_CH0 filt_v, u_int8_t state_ = 0, byte play_data = 0)
 {
   float scalfacarray[5] = {1,1,0.713,0.125,0.062};
   float stim_[5] = {0,0.5,1,2,3};
@@ -418,6 +418,7 @@ float adc_read(adc_data& data_, int stim_level,int burst_mode, float volt_ref, s
   double CH0_HF_STIM ;
   double CH0_HF_STIM_ENV;
   double CH0_beta ;
+  static int evoked_response_time = 0;
 
   CH0 =  ch0*(0.150/(pow(2,23)))*1e6;
   CH1 =  ch1*(0.150 /(pow(2,23)))*1e6;
@@ -442,9 +443,54 @@ float adc_read(adc_data& data_, int stim_level,int burst_mode, float volt_ref, s
       data_.CH0_STIM = CH0_STIM_ABS;
       if (CH0_STIM_ABS > stim_level && data_.CH0_STIM_detect == 0 && (burst_mode >= 4 || burst_mode <= 6))
       {
-        data_.evoked_detect = true;
+        //data_.evoked_detect = true;
         data_.CH0_STIM_detect = 1;
       }
+
+      if (data_.CH0_STIM_detect == 1 && (burst_mode >= 4 || burst_mode <= 6))
+      {
+        if (evoked_t == 0)
+        {
+          data_.evoked_detect = true;
+          evoked_response_time = 0;
+        }
+        else if (evoked_t > 0)
+        {
+          if (evoked_response_time >= evoked_t) // we've reached the delay counter
+          {
+            data_.evoked_detect = true;
+            data_.CH0_STIM_detect = 0;
+            evoked_response_time = 0; // resetting the counter
+          }
+          else if (evoked_response_time < evoked_t) // we're still counting...
+          {
+            delay(1); // delay for 1 ms
+            evoked_response_time++; 
+          }
+        }
+      }
+      // if (!data_.evoked_detect && (burst_mode >= 4 || burst_mode <= 6))
+      // {
+      //   if (evoked_t == 0)
+      //   {
+      //     data_.evoked_detect = true;
+      //     evoked_response_time = 0;
+      //   }
+      //   else if (evoked_t > 0)
+      //   {
+      //     if (evoked_response_time >= evoked_t)
+      //     {
+      //       data_.evoked_detect = true;
+      //       data_.CH0_STIM_detect = 1;
+      //       evoked_response_time = 0;
+      //       Serial.println("EP time: " + evoked_response_time);
+      //     }
+      //     else if (evoked_response_time < evoked_t)
+      //     {
+      //       evoked_response_time++;
+      //     }
+      //   }
+      // }
       
       //Serial.println(data_.CH0_STIM_detect );;
       
@@ -1249,6 +1295,8 @@ void loop()
   static int stim_level = 3000;
   static int gain_ = 100;
   static float gain_m = gain_/100.0;
+  static int voltage_ref = 0;
+  static int evoked_time = 0;
 if (bootup == false)
   {
     bootup = true;
@@ -1298,7 +1346,7 @@ if (t_counter_en == true)
   {
     adc_data_ready = false;
     
-    scale_sine = adc_read(ADC_D,stim_level,burst_mode, voltage_gen,filt,sig_output_state,play_data);
+    scale_sine = adc_read(ADC_D,stim_level,burst_mode,evoked_time,voltage_gen,filt,sig_output_state,play_data);
     //Serial.println(scale_sine);
     if (CAL_START == 1)
     {
@@ -1501,6 +1549,7 @@ if (t_counter_en == true)
       output_uV = Serial.parseInt();
       stim_level = Serial.parseInt();
       int evoked_mode = Serial.parseInt();
+      evoked_time = Serial.parseInt();
       if (evoked_mode == 1)
       {
         burst_mode = 5; // No High freq sin
@@ -1533,6 +1582,15 @@ if (t_counter_en == true)
       {
         stim_level = 3000;
       }
+      if (evoked_time < 0)
+      {
+        evoked_time = 0;
+      }
+      else if (evoked_time > 4000)
+      {
+        evoked_time = 4000;
+      }
+
       t_us = 500;
       
       play_data = 1;
