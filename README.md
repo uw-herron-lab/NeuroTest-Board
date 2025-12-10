@@ -3,30 +3,30 @@
 ### *In Vitro* test bench specification
 
 #### *In Vitro* test bench:
-- A Gel Electrophoresis tank filled with 0.9% saline.
+- A Gel Electrophoresis tank filled with 0.9% saline
 
 #### NeuroTest DAC:
 - Cortex M7 600MHz processor 
 - Two independent constant current output channels with 16bit resolution 
 - Up to 10kHz output sampling rate
-- Ability to replay patient data directly from SD card.
-- Ability to play data with an amplitude of 1µV RMS for usual DBS electrode dipole.
-- Ability to auto calibrate signals for the required electrode type and dipole and location within the in Vitro test bench.
+- Ability to replay patient data directly from SD card
+- Ability to play data with an amplitude of 1µV RMS for usual DBS electrode dipole
+- Ability to auto calibrate signals for the required electrode type and dipole and location within the in Vitro test bench
 
 TODO: Insert figure 1 here
 
 #### NeuroTest Sense:
-- Two 24bit sensing channels with Sampling frequency up to 8kHz.  With Default ADC sampling frequency set to 2kHz.
+- Two 24bit sensing channels with Sampling frequency up to 8kHz.  With Default ADC sampling frequency set to 2kHz
 - Noise floor of 1µV RMS at 1kHz bandwidth
-- Configurable gain and high pass filter, which are set by default to gain of 8 and high pass filter cut-off corner of 311mHz.
-- Sensing channels are used to calibrate signal generation in saline, 
-- Sensing channels are used to monitoring the performance of the aDBS device under test.
-- Configurable built in filters to detect the different stimulation programs for the SUT.
-- Ability to record data over 24 hours with PC software over USB to assess the SUT performance.
+- Configurable gain and high pass filter, which are set by default to gain of 8 and high pass filter cut-off corner of 311mHz
+- Sensing channels are used to calibrate signal generation in saline 
+- Sensing channels are used to monitoring the performance of the aDBS device under test
+- Configurable built in filters to detect the different stimulation programs for the SUT
+- Ability to record data over 24 hours with PC software over USB to assess the SUT performance
 
 #### NeuroTest Software:
-- SerialPlot version 0.12.0 is used to plot and control NeuroTest board.
-- NeuroTest board uses USB serial to output data and to received control commands.
+- SerialPlot version 0.12.0 is used to plot and control NeuroTest board
+- NeuroTest board uses USB serial to output data and to received control commands
 - Upload the setting file attached “NeuroTest board serial plot settings (Cortec).ini”
 
 TODO: Insert figure 2 here
@@ -37,12 +37,12 @@ TODO: Insert figure 2 here
     -	Ch2 raw
     -	Ch2 with 50Hz notch filter
     -	CH1 stim (filtered between 100-900Hz)
-    -	CH1 stim envelop.
-    -	CH1 beta: (filtered between 18-22Hz) used for calibrating the system.
-    -	CH1 BP: ( this has the band passed data from CH! Notch set to the centre frequency selected in Freq#xx; command ±2Hz).
-    -	State: sends a value of 1 when an output signal is enabled, and 0 when an output signal is disabled.
-    -	Play state: this sends a value of 1 when an output signal is in sinewave burst or continuous node, 2 when the system output is in patient data output mode.
-- NeuroTest starts streaming the 10 output signals at 2kHz when the serial port is opened, without the need for any commands.
+    -	CH1 stim envelop
+    -	CH1 beta: (filtered between 18-22Hz) used for calibrating the system
+    -	CH1 BP: ( this has the band passed data from CH! Notch set to the centre frequency selected in Freq#xx; command ±2Hz)
+    -	State: sends a value of 1 when an output signal is enabled, and 0 when an output signal is disabled
+    -	Play state: this sends a value of 1 when an output signal is in sinewave burst or continuous node, 2 when the system output is in patient data output mode
+- NeuroTest starts streaming the 10 output signals at 2kHz when the serial port is opened, without the need for any commands
 
 #### NeuroTest Serial commands
 When the serial port for NeuroTest board is open and the data is streaming, there are 5 commands that can be sent to NeuroTest board to control its functionality.
@@ -80,7 +80,7 @@ The NeuroTest board has a 20Hz frequency set by default to change this the Frequ
 
 5.	**Play patient data**:
 The NeuroTest board can play prerecorded patient data into the saline tank using the microSD card on board. The patient data file needs to be loaded into the microSD card, and it has the have the following format:
-    1.	The file needs to be in a comma separated format (CSV)
+    1.	The file needs to be in a comma separated format (CSV).
     2.	Cell 0 of the data must be the sampling frequency of the data. The system will allow sampling frequency between 500Hz-2kHz.
     3.	 Cell 1 of the data must be the total length of the patient data.
     4.	Cell 2 onwards is the actual patient data in microvolts.
@@ -113,7 +113,7 @@ To emulate evoked potential activity, the following steps must be followed:
         
         There are 3 modes of evoked potential that can be selected:
 
-        1. Evoked potential mode 1: Consists of single frequency sine wave as shown in figure 4
+        1. Evoked potential mode 1: Consists of single frequency sine wave as shown in figure 4.
 
         TODO: Insert figure 4 here
 
