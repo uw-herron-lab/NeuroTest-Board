@@ -1,4 +1,4 @@
-## NeuroTest: *In Vitro* test bench for adaptive DBS
+## NeuroTest: a benchtop testbed for evaluating sensing-capable electrophysiology and neurostimulation systems
 
 Instructions for operating the NTB, including function definitions and command line usage, can be found in the User Guide document.
 
