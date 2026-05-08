@@ -1,1 +1,1 @@
-The data in this folder was collected in vivo from a freely behaving rat. The Open Ephys data file is contained in the zipped folder if you are interested in the raw data. The .csv files contain subsections of the this data and the "NTB_rat_data" file was collected using the sensing portion of the NTB. The .csv files can be used for play back via the signal generator on the NTB.
+
