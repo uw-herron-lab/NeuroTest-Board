@@ -1,5 +1,7 @@
 ## NeuroTest: *In Vitro* test bench for adaptive DBS
 
+Note: These instructions can be found in the User Guide document
+
 ### *In Vitro* test bench specification
 
 #### *In Vitro* test bench:
