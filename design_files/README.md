@@ -4,4 +4,5 @@ PCBs and the majority of parts were initially acquired through JLCPCB (https://j
 
 Another option used for initial parts ordering by one of our teams was LCSC (https://www.lcsc.com/). Again, parts that were not available were acquired on Digi-key or Unikey. NOTE: the "1Meg" component is a 1 mega Ohm (1Mohm) resistor with a 0603 footprint. LCSC appears to not register this part but it can be found by searching manually for these specifications. For example searching for 1M ohm 0603 will give you parts that work, including Part number: RC0603FR-071ML from YAGEO.
 
-Though not a necessary service for NTB assembly, vendors like JLCPCB will both create the PCB and mount components (e.g., integrated circuits/ICs) that they are able to supply. We used JLC to assemble most of the components, however, the remaining parts we SMD soldered onto the PCBs ourselves. 
+Though not a necessary service for NTB assembly, vendors like JLCPCB will both create the PCB and mount components (e.g., integrated circuits/ICs) that they are able to supply. End users should double check that the components are oriented correctly between the cpl and PCB layout. We used JLC to assemble most of the components, however, the remaining parts (e.g., BNC connectors and Teensy board) were SMD soldered onto the PCBs by the labs themselves. 
+
