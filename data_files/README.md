@@ -1,0 +1,1 @@
+The subfolders contain .csv files that can be used for playback via the signal generator of the NTB. Note, the signal playback function takes time to upload and prepare the file for playback after initialization of the playback command (i.e., there will be a delay of several to tens of senconds between when you press play and when the data begins streaming). 
