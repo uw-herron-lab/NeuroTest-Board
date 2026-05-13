@@ -1,1 +1,1 @@
-The subfolders contain .csv files that can be used for playback via the signal generator of the NTB. Note, the signal playback function takes time to upload and prepare the file for playback after initialization of the playback command (i.e., there will be a delay of several to tens of senconds between when you press play and when the data begins streaming). 
+Data that can be used with the signal generator function of the NTB can be found at the linked Open Science Framework repository (link: https://osf.io/3v24t/overview).
